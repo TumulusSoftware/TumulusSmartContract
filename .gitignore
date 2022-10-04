@@ -1,0 +1,4 @@
+/artifacts/build-info/*
+/.debugger
+/compiler_config.json
+/artifacts/Datasitter.json
