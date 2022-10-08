@@ -79,15 +79,18 @@ contract Datasitter {
 	mapping(address => uint40[]) agreementsByOwner; // owner => agreementId[]
 	mapping(address => uint40[]) agreementsByAnnouncer; // announcer => agreementId[]
 
-	event AgreementRequested(uint40 indexed id, address owner, address announcer, uint8 bit);
-	event AgreementAgreed   (uint40 indexed id, address owner, address announcer, uint8 bit);
-	event AgreementRejected (uint40 indexed id, address owner, address announcer, uint8 bit);
-	event AgreementDeleted  (uint40 indexed id, address owner, address announcer, uint8 bit);
-	event AgreementAnnounced(uint40 indexed id, address owner, address announcer, uint8 bit);
-	event StateRemoved      (uint40 indexed id, address owner, address announcer, uint8 bit);
+	event AgreementRequested(uint40 id, address owner, address announcer, uint8 bit);
+	event AgreementAgreed   (uint40 id, address owner, address announcer, uint8 bit);
+	event AgreementRejected (uint40 id, address owner, address announcer, uint8 bit);
+	event AgreementDeleted  (uint40 id, address owner, address announcer, uint8 bit);
+	event AgreementAnnounced(uint40 id, address owner, address announcer, uint8 bit);
+	event StateRemoved      (uint40 id, address owner, address announcer, uint8 bit);
 	event ViewAuthorized    (Authorization[] authorizations);
 	event ViewEnded         (Authorization[] authorizations);
 	event ViewRevoked       (Authorization[] authorizations);
+	event AssetAdded        (uint40 id, uint32 sno);
+	event AgreementAdded    (uint40 id, uint32 sno);
+	event AuthorizationAdded(uint40 id, uint32 sno);
 
 	/**
 	 * Contract initialization.
@@ -196,19 +199,22 @@ contract Datasitter {
 		}
 	}
 
-	function saveAsset(uint40 id, address owner, bytes calldata data) adm alive(owner) valid(id, owner, AS) external returns(uint40 _id) {
+	function saveAsset(uint40 id, address owner, uint32 sno, bytes calldata data) adm alive(owner) valid(id, owner, AS) external {
 		bool exists = (id > 0);
-		_id = exists ? id : ++uid;
+		uint40 _id = exists ? id : ++uid;
 		assets[_id] = Asset({
 			id: _id,
 			owner: owner,
 			data: data,
 			status: EXISTING
 		});
-		if (!exists) assetsByOwner[owner].push(_id);
+		if (!exists) {
+			assetsByOwner[owner].push(_id);
+			emit AssetAdded(_id, sno);
+		}
 	}
 
-	function createAuthorization(address owner, address viewer, uint8 bit, uint40 assetId) adm alive(owner) external returns(uint40 _id) {
+	function createAuthorization(address owner, address viewer, uint8 bit, uint40 assetId, uint32 sno) adm alive(owner) external {
 		// Find a physically existing item matching parameters, either logically existing or deleted
 		bool exists = false;
 		uint40 existingId = 0;
@@ -225,7 +231,7 @@ contract Datasitter {
 		}
 		require(!exists || existingStatus != NULL, "DUP");
 
-		_id = exists ? existingId : ++uid;
+		uint40 _id = exists ? existingId : ++uid;
 		bool inState = isInState(owner, bit);
 		uint8 status = inState ? EFFECTIVE | EXISTING : EXISTING;
 
@@ -238,8 +244,12 @@ contract Datasitter {
 			status: status
 		});
 
-		if (!exists) authorizationsByOwner[owner].push(_id);
-		if (!exists) authorizationsByViewer[viewer].push(_id);
+		if (!exists) {
+			authorizationsByOwner[owner].push(_id);
+			authorizationsByViewer[viewer].push(_id);
+			emit AuthorizationAdded(_id, sno);
+		} 
+
 		if (inState) {
 			Authorization[] memory auths4event = new Authorization[](1);
 			auths4event[0] = authorizations[_id];
@@ -247,7 +257,7 @@ contract Datasitter {
 		}
 	}
 
-	function requestAgreement(address owner, address announcer, uint8 bit) adm alive(owner) external returns(uint40 _id) {
+	function requestAgreement(address owner, address announcer, uint8 bit, uint32 sno) adm alive(owner) external {
 		bool exists = false;
 		uint40 existingId = 0;
 		uint8 existingStatus = 0;
@@ -264,7 +274,7 @@ contract Datasitter {
 
 		require(!exists || existingStatus == NULL || existingStatus & REJECTED == REJECTED, "BAD_STATUS");
 
-		_id = exists ? existingId : ++uid;
+		uint40 _id = exists ? existingId : ++uid;
 		Agreement memory agreement = Agreement({
 			id: _id,
 			owner: owner,
@@ -274,11 +284,13 @@ contract Datasitter {
 		});
 
 		agreements[_id] = agreement;
-		if (!exists) agreementsByOwner[owner].push(_id);
-		if (!exists) agreementsByAnnouncer[announcer].push(_id);
+		if (!exists) {
+			agreementsByOwner[owner].push(_id);
+			agreementsByAnnouncer[announcer].push(_id);
+			emit AgreementAdded(_id, sno);
+		}
 
 		emit AgreementRequested(_id, owner, announcer, bit);
-		return _id;
 	}
 
 	function agreeAgreement(uint40 id, address announcer) adm valid(id, announcer, AG) external  {

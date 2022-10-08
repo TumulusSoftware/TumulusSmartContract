@@ -14,7 +14,26 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
+						"indexed": false,
+						"internalType": "uint40",
+						"name": "id",
+						"type": "uint40"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint32",
+						"name": "sno",
+						"type": "uint32"
+					}
+				],
+				"name": "AgreementAdded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
 						"internalType": "uint40",
 						"name": "id",
 						"type": "uint40"
@@ -45,7 +64,7 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "uint40",
 						"name": "id",
 						"type": "uint40"
@@ -76,7 +95,7 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "uint40",
 						"name": "id",
 						"type": "uint40"
@@ -107,7 +126,7 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "uint40",
 						"name": "id",
 						"type": "uint40"
@@ -138,7 +157,7 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
+						"indexed": false,
 						"internalType": "uint40",
 						"name": "id",
 						"type": "uint40"
@@ -169,7 +188,45 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
+						"indexed": false,
+						"internalType": "uint40",
+						"name": "id",
+						"type": "uint40"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint32",
+						"name": "sno",
+						"type": "uint32"
+					}
+				],
+				"name": "AssetAdded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint40",
+						"name": "id",
+						"type": "uint40"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint32",
+						"name": "sno",
+						"type": "uint32"
+					}
+				],
+				"name": "AuthorizationAdded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
 						"internalType": "uint40",
 						"name": "id",
 						"type": "uint40"
@@ -421,16 +478,15 @@
 						"internalType": "uint40",
 						"name": "assetId",
 						"type": "uint40"
+					},
+					{
+						"internalType": "uint32",
+						"name": "sno",
+						"type": "uint32"
 					}
 				],
 				"name": "createAuthorization",
-				"outputs": [
-					{
-						"internalType": "uint40",
-						"name": "_id",
-						"type": "uint40"
-					}
-				],
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -805,16 +861,15 @@
 						"internalType": "uint8",
 						"name": "bit",
 						"type": "uint8"
+					},
+					{
+						"internalType": "uint32",
+						"name": "sno",
+						"type": "uint32"
 					}
 				],
 				"name": "requestAgreement",
-				"outputs": [
-					{
-						"internalType": "uint40",
-						"name": "_id",
-						"type": "uint40"
-					}
-				],
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -831,19 +886,18 @@
 						"type": "address"
 					},
 					{
+						"internalType": "uint32",
+						"name": "sno",
+						"type": "uint32"
+					},
+					{
 						"internalType": "bytes",
 						"name": "data",
 						"type": "bytes"
 					}
 				],
 				"name": "saveAsset",
-				"outputs": [
-					{
-						"internalType": "uint40",
-						"name": "_id",
-						"type": "uint40"
-					}
-				],
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -900,17 +954,17 @@
 		},
 		"optimizer": {
 			"enabled": true,
-			"runs": 20000
+			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"DataSitter.sol": {
-			"keccak256": "0xcd3f5b9a5d57c7dae2aa00de8cb711aa1f00b64ae3ef08e42b3dfcc2230f2d0c",
+			"keccak256": "0x38a23e059ecd146c041ae36d54691df33c50765ff4c0c92492785d395a0d8f6d",
 			"license": "UNLICENSED",
 			"urls": [
-				"bzz-raw://892fb6d35312f7849684956f0ba2a0c8d9710d23bdf09adfd390dc454fd8566b",
-				"dweb:/ipfs/QmWHMq9GAXUbbc8E4uwusjeDBMwwzUyn8K2fdEgyFFLsJq"
+				"bzz-raw://e97a455f28a202724e0ccc54e715ac44ea8388252c87d53e06d9a49376e51ea7",
+				"dweb:/ipfs/QmPveDWWL83bEBwbFFQVbwRnCgA5i2QGvq4VaBPrDJ4UiX"
 			]
 		}
 	},
