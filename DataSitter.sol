@@ -89,8 +89,6 @@ contract Datasitter {
 	event ViewEnded         (Authorization[] authorizations);
 	event ViewRevoked       (Authorization[] authorizations);
 	event AssetAdded        (uint40 id, uint32 sno);
-	event AgreementAdded    (uint40 id, uint32 sno);
-	event AuthorizationAdded(uint40 id, uint32 sno);
 
 	/**
 	 * Contract initialization.
@@ -214,7 +212,7 @@ contract Datasitter {
 		}
 	}
 
-	function createAuthorization(address owner, address viewer, uint8 bit, uint40 assetId, uint32 sno) adm alive(owner) external {
+	function createAuthorization(address owner, address viewer, uint8 bit, uint40 assetId) adm alive(owner) external {
 		// Find a physically existing item matching parameters, either logically existing or deleted
 		bool exists = false;
 		uint40 existingId = 0;
@@ -247,7 +245,6 @@ contract Datasitter {
 		if (!exists) {
 			authorizationsByOwner[owner].push(_id);
 			authorizationsByViewer[viewer].push(_id);
-			emit AuthorizationAdded(_id, sno);
 		} 
 
 		if (inState) {
@@ -257,7 +254,7 @@ contract Datasitter {
 		}
 	}
 
-	function requestAgreement(address owner, address announcer, uint8 bit, uint32 sno) adm alive(owner) external {
+	function requestAgreement(address owner, address announcer, uint8 bit) adm alive(owner) external {
 		bool exists = false;
 		uint40 existingId = 0;
 		uint8 existingStatus = 0;
@@ -287,7 +284,6 @@ contract Datasitter {
 		if (!exists) {
 			agreementsByOwner[owner].push(_id);
 			agreementsByAnnouncer[announcer].push(_id);
-			emit AgreementAdded(_id, sno);
 		}
 
 		emit AgreementRequested(_id, owner, announcer, bit);
@@ -352,7 +348,7 @@ contract Datasitter {
 		}
 
 		Authorization[] memory auths4event = getAuthorizationsFromIds(authIds, EFFECTIVE, true, bit);
-		emit ViewAuthorized(auths4event);
+		if (auths4event.length > 0) emit ViewAuthorized(auths4event);
 	}
 
 	function setThreshold(address owner, uint8 bit, uint8 value) adm alive(owner) external  {
@@ -379,13 +375,14 @@ contract Datasitter {
 
 		// reset authorization
 		Authorization[] memory auths4event = getAuthorizationsFromIds(authIds, EFFECTIVE, true, bit);
-		for (uint40 i = 0; i < auths4event.length; i++) {
-			Authorization memory auth = auths4event[i];
-			auth.status -= EFFECTIVE;
-			authorizations[auth.id].status -= EFFECTIVE;
+		if (auths4event.length > 0) {
+			for (uint40 i = 0; i < auths4event.length; i++) {
+				Authorization memory auth = auths4event[i];
+				auth.status -= EFFECTIVE;
+				authorizations[auth.id].status -= EFFECTIVE;
+			}
+			emit ViewEnded(auths4event);
 		}
-		emit ViewEnded(auths4event);
-
 
 		// reset announcements
 		announcementCount[owner][bit] = 0;

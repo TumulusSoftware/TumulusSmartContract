@@ -21,25 +21,6 @@
 					},
 					{
 						"indexed": false,
-						"internalType": "uint32",
-						"name": "sno",
-						"type": "uint32"
-					}
-				],
-				"name": "AgreementAdded",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": false,
-						"internalType": "uint40",
-						"name": "id",
-						"type": "uint40"
-					},
-					{
-						"indexed": false,
 						"internalType": "address",
 						"name": "owner",
 						"type": "address"
@@ -201,25 +182,6 @@
 					}
 				],
 				"name": "AssetAdded",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": false,
-						"internalType": "uint40",
-						"name": "id",
-						"type": "uint40"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint32",
-						"name": "sno",
-						"type": "uint32"
-					}
-				],
-				"name": "AuthorizationAdded",
 				"type": "event"
 			},
 			{
@@ -478,11 +440,6 @@
 						"internalType": "uint40",
 						"name": "assetId",
 						"type": "uint40"
-					},
-					{
-						"internalType": "uint32",
-						"name": "sno",
-						"type": "uint32"
 					}
 				],
 				"name": "createAuthorization",
@@ -861,11 +818,6 @@
 						"internalType": "uint8",
 						"name": "bit",
 						"type": "uint8"
-					},
-					{
-						"internalType": "uint32",
-						"name": "sno",
-						"type": "uint32"
 					}
 				],
 				"name": "requestAgreement",
@@ -960,11 +912,11 @@
 	},
 	"sources": {
 		"DataSitter.sol": {
-			"keccak256": "0x38a23e059ecd146c041ae36d54691df33c50765ff4c0c92492785d395a0d8f6d",
+			"keccak256": "0x238f7b9b6fc50beb5c3d64b5784b3f3132bf82fda9340fc7caf79a2d0cea9322",
 			"license": "UNLICENSED",
 			"urls": [
-				"bzz-raw://e97a455f28a202724e0ccc54e715ac44ea8388252c87d53e06d9a49376e51ea7",
-				"dweb:/ipfs/QmPveDWWL83bEBwbFFQVbwRnCgA5i2QGvq4VaBPrDJ4UiX"
+				"bzz-raw://59d1e336a1e028ebf3dde7f63c9b31d8df96609b94f3770d417c9de5c61ca2f4",
+				"dweb:/ipfs/QmXb78JxWCZAgzPh35sZQaATUUpMMYbboVsmeHdFt8WgLm"
 			]
 		}
 	},
