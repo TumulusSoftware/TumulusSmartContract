@@ -912,11 +912,11 @@
 	},
 	"sources": {
 		"DataSitter.sol": {
-			"keccak256": "0x238f7b9b6fc50beb5c3d64b5784b3f3132bf82fda9340fc7caf79a2d0cea9322",
+			"keccak256": "0x086ace1f4c787347488475e1531418293b5ceb7875da6bf4803cfcea6c1c645d",
 			"license": "UNLICENSED",
 			"urls": [
-				"bzz-raw://59d1e336a1e028ebf3dde7f63c9b31d8df96609b94f3770d417c9de5c61ca2f4",
-				"dweb:/ipfs/QmXb78JxWCZAgzPh35sZQaATUUpMMYbboVsmeHdFt8WgLm"
+				"bzz-raw://e0e0be07546fd0b758bd375b9aff63b840f38e19d62718b7ce8e609d1173ecf9",
+				"dweb:/ipfs/QmPCbcUPRFKKMiCgCF7MRtrPchMC8UeCjzXTt7ssV4fE2t"
 			]
 		}
 	},

@@ -227,7 +227,7 @@ contract Datasitter {
 				break;
 			}
 		}
-		require(!exists || existingStatus != NULL, "DUP");
+		require(!exists || existingStatus == NULL, "DUP");
 
 		uint40 _id = exists ? existingId : ++uid;
 		bool inState = isInState(owner, bit);
