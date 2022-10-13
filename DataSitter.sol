@@ -99,7 +99,7 @@ contract Datasitter {
 	}
 
 	modifier adm() {
-		require(admin == msg.sender, "");
+		require(admin == msg.sender, "NOT_ADM");
 		_;
 	}
 
@@ -227,7 +227,7 @@ contract Datasitter {
 				break;
 			}
 		}
-		require(!exists || existingStatus == NULL, "DUP");
+		require(!exists || existingStatus == NULL, "DUPLICATE");
 
 		uint40 _id = exists ? existingId : ++uid;
 		bool inState = isInState(owner, bit);
@@ -269,7 +269,7 @@ contract Datasitter {
 			}
 		}
 
-		require(!exists || existingStatus == NULL || existingStatus & REJECTED == REJECTED, "BAD_STATUS");
+		require(!exists || existingStatus == NULL || existingStatus & REJECTED == REJECTED, "DUPLICATE");
 
 		uint40 _id = exists ? existingId : ++uid;
 		Agreement memory agreement = Agreement({
@@ -292,7 +292,7 @@ contract Datasitter {
 	function agreeAgreement(uint40 id, address announcer) adm valid(id, announcer, AG) external  {
 		Agreement storage agrm = agreements[id];
 		address owner = agrm.owner;
-		require(agrm.status & EFFECTIVE == 0, "AGREED");
+		require(agrm.status & EFFECTIVE == 0, "DUPLICATE");
 		agrm.status = (agrm.status | EFFECTIVE | REJECTED) - REJECTED;
 		emit AgreementAgreed(id, owner, announcer, agrm.bit);
 	}
@@ -301,7 +301,7 @@ contract Datasitter {
 		Agreement storage agrm = agreements[id];
 		address owner = agrm.owner;
 		require(agrm.status & ANNOUNCED == 0, "ANNOUNCED");
-		require(agrm.status & REJECTED == 0, "REJECTED");
+		require(agrm.status & REJECTED == 0, "DUPLICATE");
 		agrm.status = (agrm.status | EFFECTIVE | REJECTED) - EFFECTIVE;
 		emit AgreementRejected(id, owner, announcer, agrm.bit);
 	}
@@ -319,7 +319,7 @@ contract Datasitter {
 		Agreement storage agrm = agreements[id];
 		address owner = agrm.owner;
 		require(agrm.status & EFFECTIVE == EFFECTIVE, "NOT_AGREED" );
-		require(agrm.status & ANNOUNCED == 0, "ANNOUNCED" );
+		require(agrm.status & ANNOUNCED == 0, "DUPLICATE" );
 		agrm.status |= ANNOUNCED;
 
 		emit AgreementAnnounced(id, owner, announcer, agrm.bit);
@@ -353,7 +353,7 @@ contract Datasitter {
 
 	function setThreshold(address owner, uint8 bit, uint8 value) adm alive(owner) external  {
 		uint8 anncCount = announcementCount[owner][bit];
-		require(value > 0, "VAL!=0");
+		require(value > 0, "VAL_INVALID");
 		require(thresholdCount[owner][bit] + 1 != value, "VAL_SAME");
 		thresholdCount[owner][bit] = value - 1; 
 
