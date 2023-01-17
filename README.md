@@ -5,7 +5,7 @@ Currently the only existing contract is written in Solidity and ready to be depl
 
 Tumulus Smart Contracts provide data access permission marshalling based on states of data owners.
 
-# DataSitter.sol
+# Tumulus.sol
 
 This smart contract is written in Solidity and must be deployed to an Ethereum-based network.
 
@@ -29,11 +29,11 @@ For information and guidance on deploying smart contracts go here: https://ether
 
 ## How it Works
 
-The DataSitter contract is designed to track specific states of data owners. A data owner is an individual or party who owns the data that is stored via the Tumulus API. The smart contract is able to track the owner state and grant certain access permissions to other individuals or parties based on changes in owner state.
+The Tumulus contract is designed to track specific states of data owners. A data owner is an individual or party who owns the data that is stored via the Tumulus API. The smart contract is able to track the owner state and grant certain access permissions to other individuals or parties based on changes in owner state.
 
 ## Using the Smart Contract
 
-Smart contracts deployed to the blockchain are given their own unique address and as such, in order to use the smart contract you must deploy your own version of DataSitter to the blockchain. Follow the links above for guidance on deploying smart contracts.
+Smart contracts deployed to the blockchain are given their own unique address and as such, in order to use the smart contract you must deploy your own version of Tumulus to the blockchain. Follow the links above for guidance on deploying smart contracts.
 
 __Note:__ _Deploying a Smart Contract involves blockchain activity and will incur GAS fees._
 

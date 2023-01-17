@@ -4,7 +4,7 @@ pragma solidity >=0.8.0 <0.9.0;
 
 // import "hardhat/console.sol";
 
-contract Datasitter {
+contract Tumulus {
 	/// constants for status field across several structs
 	uint8 constant NULL = 0; // non-exists
 	uint8 constant EXISTING = 1;
