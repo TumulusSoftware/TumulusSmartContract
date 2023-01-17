@@ -1,6 +1,6 @@
 # Contributing Guidelines
 
-The Tumulus Demo Application accepts contributions via GitHub pull requests. This document outlines the process to help get your contribution accepted.
+The Tumulus Smart Contract accepts contributions via GitHub pull requests. This document outlines the process to help get your contribution accepted.
 
 ## Contents
 - [Support Channels](#support-channels)
@@ -18,7 +18,7 @@ The Tumulus Demo Application accepts contributions via GitHub pull requests. Thi
 
 Whether you are a user or contributor, official support channels include:
 
-- [Issues](https://github.com/TumulusSoftware/TumulusDemoApplication/issues)
+- [Issues](https://github.com/TumulusSoftware/TumulusSmartContract/issues)
 
 Before opening a new issue or submitting a new pull request, it's helpful to search the project -
 it's likely that another user has already reported the issue you're facing, or it's a known issue
@@ -31,14 +31,14 @@ Issues are used as the primary method for tracking anything to do with the proje
 ### Vulnerability Disclosure
 
 Most of the time, when you find a bug, it should be reported using
-[GitHub issues](https://github.com/TumulusSoftware/TumulusDemoApplication/issues). However, if
+[GitHub issues](https://github.com/TumulusSoftware/TumulusSmartContract/issues). However, if
 you are reporting a _security vulnerability_, please email a report to
 [security@tumulus.io](mailto:security@tumulus.io). This will give
 us a chance to try to fix the issue before it is exploited in the wild.
 
 ### Issue Types
 
-There are 3 types of issues (each with their own corresponding [label](https://github.com/TumulusSoftware/TumulusDemoApplication/labels)):
+There are 3 types of issues (each with their own corresponding [label](https://github.com/TumulusSoftware/TumulusSmartContract/labels)):
 
 - **Bugs:** These track bugs with the code or problems with the documentation (i.e. missing or incomplete)
 - **Features:** These track specific feature requests and ideas until they are complete.
@@ -75,25 +75,25 @@ Like most open source projects, we use Pull Requests (PRs) to track code changes
 
 ### Forking
 
-1. Fork the [TumulusDemoApplication](https://github.com/TumulusSoftware/TumulusDemoApplication) repo
+1. Fork the [TumulusSmartContract](https://github.com/TumulusSoftware/TumulusSmartContract) repo
 
-Go to the [project](https://github.com/TumulusSoftware/TumulusDemoApplication) page then hit the `Fork`
+Go to the [project](https://github.com/TumulusSoftware/TumulusSmartContract) page then hit the `Fork`
 button to fork your own copy of the repository to your GitHub account.
 
 2. Clone the forked repo to your local working directory.
 ```sh
-$ git clone https://github.com/$your_github_account/TumulusDemoApplication.git   
+$ git clone https://github.com/$your_github_account/TumulusSmartContract.git   
 ```
 3. Add an `upstream` remote to keep your fork in sync with the main repo.
 ```sh
-$ cd TumulusDemoApplication
-$ git remote add upstream https://github.com/TumulusSoftware/TumulusDemoApplication.git
+$ cd TumulusSmartContract
+$ git remote add upstream https://github.com/TumulusSoftware/TumulusSmartContract.git
 $ git remote -v
 
-origin  https://github.com/$your_github_account/TumulusDemoApplication.git (fetch)
-origin  https://github.com/$your_github_account/TumulusDemoApplication.git (push)
-upstream        https://github.com/TumulusSoftware/TumulusDemoApplication.git (fetch)
-upstream        https://github.com/TumulusSoftware/TumulusDemoApplication.git (push)
+origin  https://github.com/$your_github_account/TumulusSmartContract.git (fetch)
+origin  https://github.com/$your_github_account/TumulusSmartContract.git (push)
+upstream        https://github.com/TumulusSoftware/TumulusSmartContract.git (fetch)
+upstream        https://github.com/TumulusSoftware/TumulusSmartContract.git (push)
 ```
 4. Sync your local `master` branch.
 ```sh
